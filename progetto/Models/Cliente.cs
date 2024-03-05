@@ -19,7 +19,7 @@ namespace progetto.Models
         [Display(Name = "Codice Fiscale")]
         public string Codice_Fiscale { get; set; }
 
-        [StringLength(20, ErrorMessage = "La Partita IVA deve essere lunga al massimo 20 caratteri.")]
+        [StringLength(10, ErrorMessage = "La Partita IVA deve essere lunga al massimo 10 caratteri.")]
         [Display(Name = "Partita IVA")]
         public string Partita_IVA { get; set; }
 

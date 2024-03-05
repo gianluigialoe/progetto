@@ -10,6 +10,7 @@ namespace progetto.Models
     {
         [Key]
         public int ID_Stato { get; set; }
+        public int ID_Spedizione { get; set; }
 
         [Required(ErrorMessage = "Il campo Stato è obbligatorio.")]
         public string Stato { get; set; }

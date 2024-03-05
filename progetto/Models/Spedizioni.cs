@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -43,6 +44,11 @@ namespace progetto.Models
         public DateTime Data_Consegna_Prevista { get; set; }
 
         // Relazione con il modello "Cliente"
-        public Cliente Cliente { get; set; }
+        [ForeignKey("Cliente")]
+        public int ID_Cliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
+
+        // Relazione con il modello "StatoSpedizione"
+        public virtual StatoSpedizione StatoSpedizione { get; set; }
     }
 }

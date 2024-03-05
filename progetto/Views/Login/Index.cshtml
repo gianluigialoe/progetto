@@ -1,0 +1,50 @@
+﻿@model progetto.Models.Cliente
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Login</h2>
+        </div>
+        <div class="card-body">
+
+            @using (Html.BeginForm())
+            {
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Tipo_Cliente, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Tipo_Cliente, new { @class = "form-control", placeholder = "Inserisci il tipo cliente" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Nome, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Nome, new { @class = "form-control", placeholder = "Inserisci il nome" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Cognome, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Cognome, new { @class = "form-control", placeholder = "Inserisci il cognome" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Codice_Fiscale, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Codice_Fiscale, new { @class = "form-control", placeholder = "Inserisci il codice fiscale" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Partita_IVA, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Partita_IVA, new { @class = "form-control", placeholder = "Inserisci la partita IVA" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Indirizzo, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Indirizzo, new { @class = "form-control", placeholder = "Inserisci l'indirizzo" })
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+            }
+        </div>
+    </div>
+</div>
