@@ -1,6 +1,25 @@
-﻿@{
+﻿
+
+
+@{
     ViewBag.Title = "Home Page";
 }
+
+<h2>Benvenuto nella pagina principale</h2>
+
+@using (Html.BeginForm("Pacco", "Home", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.Label("Nome Azienda:")
+        @Html.TextBox("nomeAzienda", null, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cerca</button>
+}
+
+
+
+
 
 <main>
     <section class="row" aria-labelledby="aspnetTitle">

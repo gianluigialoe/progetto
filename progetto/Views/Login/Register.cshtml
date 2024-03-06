@@ -1,0 +1,63 @@
+﻿@model progetto.Models.Cliente
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm("Register", "Login", FormMethod.Post, new { novalidate = "true" }))
+{
+    @Html.AntiForgeryToken()
+
+    // Visualizza gli errori di validazione se ModelState non è valido
+    if (!ViewData.ModelState.IsValid)
+    {
+        @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+    }
+
+    <div class="mb-3">
+        // Etichetta e campo per l'inserimento del tipo cliente
+        @Html.LabelFor(model => model.Tipo_Cliente, new { @class = "form-label" })
+        @Html.DropDownListFor(model => model.Tipo_Cliente, new SelectList(new List<string> { "Azienda", "Privato" }), "-- Seleziona --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Tipo_Cliente, null, new { @class = "invalid-feedback" })
+    </div>
+
+    <div class="mb-3">
+        // Etichetta e campo per l'inserimento del nome
+        @Html.LabelFor(model => model.Nome, new { @class = "form-label" })
+        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Nome") ? "" : "is-invalid")}" } })
+        @Html.ValidationMessageFor(model => model.Nome, null, new { @class = "invalid-feedback" })
+    </div>
+
+    <div class="mb-3">
+        // Etichetta e campo per l'inserimento del cognome
+        @Html.LabelFor(model => model.Cognome, new { @class = "form-label" })
+        @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Cognome") ? "" : "is-invalid")}" } })
+        @Html.ValidationMessageFor(model => model.Cognome, null, new { @class = "invalid-feedback" })
+    </div>
+
+    <div class="mb-3">
+        // Etichetta e campo per l'inserimento del codice fiscale
+        @Html.LabelFor(model => model.Codice_Fiscale, new { @class = "form-label" })
+        @Html.EditorFor(model => model.Codice_Fiscale, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Codice_Fiscale") ? "" : "is-invalid")}" } })
+        @Html.ValidationMessageFor(model => model.Codice_Fiscale, null, new { @class = "invalid-feedback" })
+    </div>
+
+    <div class="mb-3">
+        // Etichetta e campo per l'inserimento della partita IVA
+        @Html.LabelFor(model => model.Partita_IVA, new { @class = "form-label" })
+        @Html.EditorFor(model => model.Partita_IVA, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Partita_IVA") ? "" : "is-invalid")}" } })
+        @Html.ValidationMessageFor(model => model.Partita_IVA, null, new { @class = "invalid-feedback" })
+    </div>
+
+    <div class="mb-3">
+        // Etichetta e campo per l'inserimento dell'indirizzo
+        @Html.LabelFor(model => model.Indirizzo, new { @class = "form-label" })
+        @Html.EditorFor(model => model.Indirizzo, new { htmlAttributes = new { @class = $"form-control {(ViewData.ModelState.IsValidField("Indirizzo") ? "" : "is-invalid")}" } })
+        @Html.ValidationMessageFor(model => model.Indirizzo, null, new { @class = "invalid-feedback" })
+    </div>
+
+    // Pulsante di invio del modulo
+    <button type="submit" class="btn btn-primary">Registrati</button>
+}

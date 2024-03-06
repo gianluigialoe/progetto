@@ -1,0 +1,29 @@
+﻿@model List<progetto.Models.StatoSpedizione>
+@using progetto.Models
+@{
+    ViewBag.Title = "Stati Spedizione";
+}
+
+<h2>Elenco degli Stati di Spedizione</h2>
+
+<table class="table">
+    <tr>
+        <th>ID Stato</th>
+        <th>Stato</th>
+        <th>Luogo Pacco</th>
+        <th>Descrizione Eventuale</th>
+        <th>Data Aggiornamento</th>
+        <th>Ora Aggiornamento</th>
+    </tr>
+    @foreach (var stato in Model)
+    {
+        <tr>
+            <td>@stato.ID_Stato</td>
+            <td>@stato.Stato</td>
+            <td>@stato.Luogo_Pacco</td>
+            <td>@stato.Descrizione_Eventuale</td>
+            <td>@stato.Data_Aggiornamento.ToShortDateString()</td>
+            <td>@stato.Ora_Aggiornamento</td>
+        </tr>
+    }
+</table>

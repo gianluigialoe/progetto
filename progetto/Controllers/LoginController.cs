@@ -78,5 +78,60 @@ namespace progetto.Controllers
             // Ridireziona l'utente alla pagina "Index" del controller "Home"
             return RedirectToAction("Index", "Home");
         }
+
+            public ActionResult Register()
+            {
+                // Controlla se l'utente è già autenticato, in tal caso reindirizza a "Prova"
+                if (HttpContext.User.Identity.IsAuthenticated) return RedirectToAction("Prova");
+
+                // Se l'utente non è autenticato, restituisce la vista di registrazione
+                return View();
+            }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult Register([Bind(Exclude = "ID_Cliente")] Cliente cliente)
+            {
+                // Verifica se tutti i campi del modello sono validi
+                if (ModelState.IsValid)
+                {
+                    // Ottieni la stringa di connessione al database dal file di configurazione
+                    string connString = ConfigurationManager.ConnectionStrings["MYDATABASE"].ToString();
+
+                    // Apre una nuova connessione al database
+                    using (var conn = new SqlConnection(connString))
+                    {
+                        conn.Open();
+
+                        // Crea un nuovo comando SQL per l'inserimento di un nuovo cliente nel database
+                        using (var command = new SqlCommand(@"
+                    INSERT INTO Clienti
+                    (Tipo_Cliente, Nome, Cognome, Codice_Fiscale, Partita_IVA, Indirizzo)
+                    VALUES (@Tipo_Cliente, @Nome, @Cognome, @Codice_Fiscale, @Partita_IVA, @Indirizzo)
+                ", conn))
+                        {
+                            // Imposta i parametri del comando con i valori del cliente
+                            command.Parameters.AddWithValue("@Tipo_Cliente", cliente.Tipo_Cliente);
+                            command.Parameters.AddWithValue("@Nome", cliente.Nome);
+                            command.Parameters.AddWithValue("@Cognome", cliente.Cognome);
+                            command.Parameters.AddWithValue("@Codice_Fiscale", cliente.Codice_Fiscale);
+                            command.Parameters.AddWithValue("@Partita_IVA", cliente.Partita_IVA);
+                            command.Parameters.AddWithValue("@Indirizzo", cliente.Indirizzo);
+
+                            // Esegue il comando SQL e ottiene il numero di righe interessate
+                            var countRows = command.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Reindirizza all'azione "Index" dopo la registrazione avvenuta con successo
+                    return RedirectToAction("Index");
+                }
+
+                // Se almeno un campo non è valido, restituisce la vista di registrazione con gli errori
+                // Non effettua il reindirizzamento in questo caso
+                return View();
+            }
+        }
+
     }
-}
+
