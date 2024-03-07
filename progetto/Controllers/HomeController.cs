@@ -16,7 +16,7 @@ namespace progetto.Controllers
             return View();
         }
         [AllowAnonymous]
-        public ActionResult Pacco()
+        public ActionResult Pacco(string nome, string Indirizzo)
         {
             // Connessione al database usando la stringa di connessione nel file di configurazione.
             string connString = ConfigurationManager.ConnectionStrings["MYDATABASE"].ToString();
@@ -24,7 +24,17 @@ namespace progetto.Controllers
             conn.Open();
 
             // Query SQL per selezionare tutti gli stati di spedizione dal database.
-            var command = new SqlCommand("SELECT * FROM stato_spedizioni", conn);
+            var command = new SqlCommand(
+      "SELECT s.*, c.Nome AS NomeCliente, c.Indirizzo AS IndirizzoCliente " +
+      "FROM stato_spedizioni s " +
+      "JOIN Spedizioni sp ON s.ID_Spedizione = sp.ID_Spedizione " +
+      "JOIN Clienti c ON sp.ID_Cliente = c.ID_Cliente " +
+      "WHERE c.Nome = @Nome AND c.Indirizzo = @Indirizzo", conn);
+
+            command.Parameters.AddWithValue("@Nome", nome);
+            command.Parameters.AddWithValue("@Indirizzo", Indirizzo);
+     
+
             var reader = command.ExecuteReader();
 
             // Lista per memorizzare gli stati di spedizione.

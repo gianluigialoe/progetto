@@ -1,0 +1,61 @@
+﻿
+
+@model progetto.Models.Spedizioni
+
+@{
+    ViewBag.Title = "Inserisci Spedizione";
+}
+
+<h2>Inserisci Spedizione</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <label for="Numero_Spedizione">Numero Spedizione:</label>
+        <input type="text" name="Numero_Spedizione" required />
+    </div>
+
+    <div>
+        <label for="Data_Spedizione">Data Spedizione:</label>
+        <input type="date" name="Data_Spedizione" required />
+    </div>
+
+    <div>
+        <label for="Peso">Peso:</label>
+        <input type="text" name="Peso" required />
+    </div>
+
+    <div>
+        <label for="Citta_Destinataria">Città Destinataria:</label>
+        <input type="text" name="Citta_Destinataria" required />
+    </div>
+
+    <div>
+        <label for="Indirizzo_Destinatario">Indirizzo Destinatario:</label>
+        <input type="text" name="Indirizzo_Destinatario" required />
+    </div>
+
+    <div>
+        <label for="Nominativo_Destinatario">Nominativo Destinatario:</label>
+        <input type="text" name="Nominativo_Destinatario" required />
+    </div>
+
+    <div>
+        <label for="Costo_Spedizione">Costo Spedizione:</label>
+        <input type="text" name="Costo_Spedizione" required />
+    </div>
+
+    <div>
+        <label for="Data_Consegna_Prevista">Data Consegna Prevista:</label>
+        <input type="date" name="Data_Consegna_Prevista" required />
+    </div>
+
+    <div>
+        <label for="ID_Cliente">ID Cliente:</label>
+        <input type="text" name="ID_Cliente" required />
+    </div>
+
+    <div>
+        <input type="submit" value="Inserisci" />
+    </div>
+}

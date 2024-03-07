@@ -1,0 +1,44 @@
+﻿
+@model progetto.Models.StatoSpedizione
+@{
+    ViewBag.Title = "Inserisci Stato Spedizione";
+}
+
+<h2>Inserisci Stato Spedizione</h2>
+
+@using (Html.BeginForm())
+{ 
+<div>
+    <label for="ID_Spedizione">ID Spedizione:</label>
+    <input type="text" name="ID_Spedizione" required />
+</div>
+
+<div>
+    <label for="Stato">Stato:</label>
+    <input type="text" name="Stato" required />
+</div>
+
+<div>
+    <label for="Luogo_Pacco">Luogo Pacco:</label>
+    <input type="text" name="Luogo_Pacco" required />
+</div>
+
+<div>
+    <label for="Descrizione_Eventuale">Descrizione Eventuale:</label>
+    <input type="text" name="Descrizione_Eventuale" />
+</div>
+
+<div>
+    <label for="Data_Aggiornamento">Data Aggiornamento:</label>
+    <input type="date" name="Data_Aggiornamento" required />
+</div>
+
+<div>
+    <label for="Ora_Aggiornamento">Ora Aggiornamento:</label>
+    <input type="text" name="Ora_Aggiornamento" required />
+</div>
+
+<div>
+    <input type="submit" value="Inserisci" />
+</div>
+}

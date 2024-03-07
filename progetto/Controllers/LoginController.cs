@@ -48,7 +48,10 @@ namespace progetto.Controllers
 
                 // Imposta il cookie di autenticazione con l'ID_Cliente e reindirizza alla pagina "Index" del controller "Home"
                 FormsAuthentication.SetAuthCookie(reader["ID_Cliente"].ToString(), true);
-                return RedirectToAction("Index", "Home"); // TODO: reindirizza alla pagina del pannello
+                Session["ID_Cliente"] = reader["ID_Cliente"].ToString();
+                Session["Nome"] = reader["Nome"].ToString();
+                Session["Cognome"] = reader["Cognome"].ToString();
+                return RedirectToAction("Prova", "Login"); // TODO: reindirizza alla pagina del pannello
             }
 
             // Se l'utente non è valido, reindirizza alla pagina di login
@@ -56,30 +59,46 @@ namespace progetto.Controllers
         }
 
         // Azione per la visualizzazione della pagina "Prova", accessibile solo agli utenti autenticati
-        [Authorize]
-        public ActionResult Prova()
-        {
-            // Ottiene l'ID_Cliente dall'identità dell'utente autenticato
-            var iD_ClienteId = HttpContext.User.Identity.Name;
+        //[Authorize]
+        //public ActionResult Prova()
+        //{
+        //    // Ottiene l'ID_Cliente dall'identità dell'utente autenticato
+        //    var iD_ClienteId = HttpContext.User.Identity.Name;
 
-            // Passa l'ID_Cliente alla vista utilizzando ViewBag
-            ViewBag.ID_Cliente = iD_ClienteId;
-            return View();
-        }
+        //    if (iD_ClienteId != null)
+        //    {
+        //        ViewBag.ID_Cliente = iD_ClienteId;
+        //        ViewBag.Nome = HttpContext.Session["Nome"] as string;
+        //        ViewBag.Cognome = HttpContext.Session["Cognome"] as string;
+        //        // Aggiungi altre proprietà qui se necessario
+
+        //        return View();
+
+        //    }
+
+        //    // Se l'utente non è valido, reindirizza alla pagina di login
+        //    return RedirectToAction("Index");
+        //}
+
 
         // Azione per il logout
-        [Authorize, HttpPost]
+        [Authorize]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
-            // Sloggare l'utente distruggendo il cookie di autenticazione
+            // Cancella l'identità dell'utente
             FormsAuthentication.SignOut();
+
+            
+            // Cancella eventuali altri cookie o informazioni di sessione
 
             // Ridireziona l'utente alla pagina "Index" del controller "Home"
             return RedirectToAction("Index", "Home");
         }
 
-            public ActionResult Register()
+
+        public ActionResult Register()
             {
                 // Controlla se l'utente è già autenticato, in tal caso reindirizza a "Prova"
                 if (HttpContext.User.Identity.IsAuthenticated) return RedirectToAction("Prova");
